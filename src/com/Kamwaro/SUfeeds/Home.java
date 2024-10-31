@@ -5,18 +5,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import com.Kamwaro.SUfeeds.test_db;
 
 public class Home extends JFrame{
     private JButton create;
     private JButton login;
     private JLabel greeting;
+    private JPanel panel;
     public Home(){
         super("SU Feeds");
         create = new JButton("Create Account");
         create.setPreferredSize(new Dimension(150,25));
         login = new JButton("Login");
-        login.setPreferredSize(new Dimension(150,25));
+        login.setPreferredSize(new Dimension(180,25));
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -27,15 +28,31 @@ public class Home extends JFrame{
         add(create,gbc);
         gbc.gridy+=2;
         add(login,gbc);
+
+
+
+
         create.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame create_account = new JFrame();
-                create_account.setLayout(new FlowLayout());
-                create_account.setVisible(true);
-                JLabel username = new JLabel("Username");
-                create_account.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                // Stores the entered values in a string
+                String username = JOptionPane.showInputDialog("Enter your username");
+                String password = JOptionPane.showInputDialog("Enter your password");
+                test_db.addUser(username, password);
+                JOptionPane.showMessageDialog(null, "User added successfully");
 
+
+
+
+
+
+            }
+        });
+        login.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String username = JOptionPane.showInputDialog("Enter your username");
+                String password = JOptionPane.showInputDialog("Enter your password");
             }
         });
     }
